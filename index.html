@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Message 💔</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial, sans-serif;
+}
+
+body{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+}
+
+/* الكارت */
+.card{
+  background:#fff;
+  width:340px;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 20px 50px rgba(0,0,0,0.3);
+  animation:fadeIn 1s ease;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(-30px);}
+  to{opacity:1;}
+}
+
+h2{
+  color:#ff2f6d;
+  margin-bottom:20px;
+}
+
+/* زرار */
+button{
+  padding:10px 18px;
+  border:none;
+  border-radius:12px;
+  background:#ff2f6d;
+  color:#fff;
+  cursor:pointer;
+  margin:5px;
+  transition:0.3s;
+}
+
+button:hover{
+  background:#e61e5c;
+}
+
+/* مربع الكتابة */
+textarea{
+  width:100%;
+  height:80px;
+  margin-top:15px;
+  padding:10px;
+  border-radius:12px;
+  border:1px solid #ddd;
+  resize:none;
+  display:none;
+}
+
+.saved{
+  margin-top:10px;
+  color:#ff2f6d;
+  font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h2>إنتي زعلانة مني؟ 💔</h2>
+
+  <button onclick="showBox()">اكتب الرد</button>
+
+  <textarea id="reply" placeholder="اكتبي اللي جواكي هنا..."></textarea>
+
+  <button onclick="saveReply()">حفظ</button>
+
+  <div class="saved" id="savedMsg"></div>
+</div>
+
+<script>
+const replyBox = document.getElementById("reply");
+const savedMsg = document.getElementById("savedMsg");
+
+/* تحميل الرد لو موجود */
+window.onload = function(){
+  const saved = localStorage.getItem("reply_text");
+  if(saved){
+    replyBox.style.display="block";
+    replyBox.value = saved;
+    savedMsg.textContent = "الرد محفوظ ❤️";
+  }
+};
+
+function showBox(){
+  replyBox.style.display="block";
+}
+
+function saveReply(){
+  const text = replyBox.value;
+  if(text.trim() === ""){
+    alert("اكتبي حاجة الأول ✨");
+    return;
+  }
+  localStorage.setItem("reply_text", text);
+  savedMsg.textContent = "تم الحفظ بنجاح 💕";
+}
+</script>
+
+</body>
+</html>
